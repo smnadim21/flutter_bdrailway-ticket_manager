@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_manager_flutter/database/entity.dart';
+import 'package:ticket_manager_flutter/database/ticket_database.dart';
 import 'package:ticket_manager_flutter/home.dart';
 
 class AddAccountPage extends StatefulWidget {
@@ -11,7 +13,8 @@ class AddAccountPage extends StatefulWidget {
 }
 
 class _AddAccountPageState extends State<AddAccountPage> {
-  late TextEditingController mobileTextController, emailTextController,
+  late TextEditingController mobileTextController,
+      emailTextController,
       passWordController,
       forgotPassWordController;
 
@@ -23,6 +26,14 @@ class _AddAccountPageState extends State<AddAccountPage> {
     emailTextController = TextEditingController();
     passWordController = TextEditingController();
     forgotPassWordController = TextEditingController(text: 'Forgot Password');
+    printDB();
+  }
+
+  Future<void> printDB() async {
+    var db = await LocalDB.initDb();
+    db.localDao.getAllAccounts().then((value) => value.forEach((element) {
+          print('${element.email}, ${element.mobile}');
+        }));
   }
 
   @override
@@ -52,7 +63,7 @@ class _AddAccountPageState extends State<AddAccountPage> {
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
                   child: const Text(
-                    "Login Page",
+                    "ADD NEW ACCOUNT",
                     textAlign: TextAlign.center,
                   ), //Image.asset('asset/images/flutter-logo.png')
                 ),
@@ -134,12 +145,13 @@ class _AddAccountPageState extends State<AddAccountPage> {
                   tAccount.email = emailTextController.text;
                   tAccount.mobile = mobileTextController.text;
 
+                  addUserAccount(tAccount);
 
                   // snackbar-------------------------
                   final snackBar = SnackBar(
-                    content: Text(emailTextController.text+ " ?"),
+                    content: Text(emailTextController.text + " ?"),
                     action: SnackBarAction(
-                      label: 'Undo',
+                      label: 'saved!',
                       onPressed: () {
                         // Some code to undo the change.
                       },
@@ -150,9 +162,11 @@ class _AddAccountPageState extends State<AddAccountPage> {
                   // and use it to show a SnackBar.
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
-                child: const Text(
+                child: Text(
                   'Save Account',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: GoogleFonts.poppins(
+                      textStyle:
+                          const TextStyle(color: Colors.white, fontSize: 25)),
                 ),
               ),
             ),
@@ -164,5 +178,14 @@ class _AddAccountPageState extends State<AddAccountPage> {
         ),
       ),
     );
+  }
+
+  Future<void> addUserAccount(TicketAccount ticketAccount) async {
+    final database = await LocalDB.initDb();
+    if (database != null) {
+      database.localDao.insertTicketAccount(ticketAccount);
+    } else {
+      print("HOROR !");
+    }
   }
 }

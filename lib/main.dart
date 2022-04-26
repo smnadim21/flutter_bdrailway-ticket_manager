@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ticket_manager_flutter/add_account.dart';
 import 'package:ticket_manager_flutter/add_ticket.dart';
+import 'package:ticket_manager_flutter/database/ticket_database.dart';
 
 import 'home.dart';
 
@@ -21,10 +22,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Home(),
-      getPages:  [
+      getPages: [
         GetPage(name: '/', page: () => Home()),
-        GetPage(name: '/add_ticket', page: () => const AddTicketPage(title: "title")),
-        GetPage(name: '/add_account', page: () => const AddAccountPage(title: "Add new account")),
+        GetPage(
+            name: '/add_ticket',
+            page: () => const AddTicketPage(title: "title")),
+        GetPage(
+            name: '/add_account',
+            page: () => const AddAccountPage(title: "Add new account")),
       ],
     );
   }
