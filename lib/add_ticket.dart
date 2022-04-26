@@ -58,6 +58,21 @@ class _AddTicketPageState extends State<AddTicketPage> {
             ),
             Padding(
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+              padding:
+                  EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
+              child: DropdownButton<String>(
+                hint: Text("Select Account"),
+                items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
+            ),
+            Padding(
+              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: emailTextController,
