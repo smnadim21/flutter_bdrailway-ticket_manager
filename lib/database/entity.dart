@@ -4,9 +4,12 @@ import 'package:floor/floor.dart';
 class TicketAccount {
   @PrimaryKey(autoGenerate: true)
   int? id;
-  String? mobile;
-  String? email;
+  String mobile;
+  String email;
 
-  TicketAccount();
+  TicketAccount(this.mobile, this.email);
 
+  TicketAccount.empty()
+      : mobile = "",
+        email = "";
 }

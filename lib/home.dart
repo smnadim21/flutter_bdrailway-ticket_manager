@@ -109,7 +109,7 @@ class Home extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(const AddTicketPage(title: "Add a Ticket")),
+        onPressed: () => Get.to( AddTicketPage(title: "Add a Ticket")),
         //tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

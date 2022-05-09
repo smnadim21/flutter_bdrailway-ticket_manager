@@ -81,7 +81,7 @@ class _$TicketDB extends TicketDB {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `TicketAccount` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `mobile` TEXT, `email` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `TicketAccount` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `mobile` TEXT NOT NULL, `email` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -118,7 +118,8 @@ class _$LocalDao extends LocalDao {
   @override
   Future<List<TicketAccount>> getAllAccounts() async {
     return _queryAdapter.queryList('SELECT * from TicketAccount',
-        mapper: (Map<String, Object?> row) => TicketAccount());
+        mapper: (Map<String, Object?> row) =>
+            TicketAccount(row['mobile'] as String, row['email'] as String));
   }
 
   @override

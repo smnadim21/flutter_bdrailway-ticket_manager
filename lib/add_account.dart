@@ -141,7 +141,7 @@ class _AddAccountPageState extends State<AddAccountPage> {
                     });
                   }
 
-                  TicketAccount tAccount = TicketAccount();
+                  TicketAccount tAccount = TicketAccount.empty();
                   tAccount.email = emailTextController.text;
                   tAccount.mobile = mobileTextController.text;
 

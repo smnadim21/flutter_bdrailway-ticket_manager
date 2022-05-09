@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => Home()),
         GetPage(
             name: '/add_ticket',
-            page: () => const AddTicketPage(title: "title")),
+            page: () =>  AddTicketPage(title: "title")),
         GetPage(
             name: '/add_account',
             page: () => const AddAccountPage(title: "Add new account")),
