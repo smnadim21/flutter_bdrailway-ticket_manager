@@ -8,7 +8,7 @@ on:
 
 jobs:
     build:
-      runs-on: macos-latest
+      runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
         - uses: actions/setup-java@v2
@@ -22,14 +22,7 @@ jobs:
 #        - run: flutter test
         - run: flutter build apk
         - run: flutter build appbundle
-        - name: Release Action
-          uses: ncipollo/release-action@v1
-          with:
-            artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
-            tag: v1.0.${{github.run_number}}
-            token: ${{ secrets.GITHUB_TOKEN }} # this is automatically provided by github
-            # commit: ${{!github!}}
-        - name: upload artefact to App Center
+        - name: upload artifact to App Center
           uses: wzieba/AppCenter-Github-Action@v1
           with:
             appName: smnadim21/Bangladesh Railway Ticket Manager
@@ -38,5 +31,12 @@ jobs:
             file: build/app/outputs/bundle/release/app-release.aab
             notifyTesters: true
             debug: false
+        - name: Release Action
+          uses: ncipollo/release-action@v1
+          with:
+            artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
+            tag: v1.0.${{github.run_number}}
+            token: ${{ secrets.GITHUB_TOKEN }} # this is automatically provided by github
+            # commit: ${{!github!}}
 
 
