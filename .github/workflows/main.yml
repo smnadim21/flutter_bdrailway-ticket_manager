@@ -25,7 +25,7 @@ jobs:
         - name: upload artifact to App Center
           uses: wzieba/AppCenter-Github-Action@v1
           with:
-            appName: smnadim21/Bangladesh Railway Ticket Manager
+            appName: smnadim21/Bangladesh-Railway-Ticket-Manager
             token: ${{secrets.APPCENTER}}
             group: Testers
             file: build/app/outputs/bundle/release/app-release.aab
