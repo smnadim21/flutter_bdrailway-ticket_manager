@@ -22,6 +22,7 @@ jobs:
 #        - run: flutter test
         - run: flutter build apk
         - run: flutter build appbundle
+        - run: flutter build ipa
         - name: upload artifact to App Center
           uses: wzieba/AppCenter-Github-Action@v1
           with:
